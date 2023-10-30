@@ -16,17 +16,18 @@ router.get('/', async (req, res) => {
 // Filtra somente os nomes dos prestadores
 router.get('/nome_prestador', async (req, res) => {
   try {
-    let prestadores = await Prestador.find({}, 'nome_prestador'); // Apenas traz o campo 'nome_prestador'
-    res.status(200).json(prestadores);
+    let prestador = await Prestador.find({}, 'nome_prestador'); // Apenas traz o campo 'nome_prestador'
+    res.status(200).json(prestador);
   } catch (error) {
     res.status(500).json(error); // Erro interno do servidor
   }
 });
 //Filtra os prestadores pelo nome
-router.get('/nome_prestador/:nome', async (req, res) => {
-  try {
-    let { nome } = req.params;
-    // Utiliza o campo 'nome_prestador' na projeção da consulta
+router.get('/:nome', async (req, res) => {
+  let { nome } = req.params;
+
+  try {   
+   
     let prestador = await Prestador.find({ nome_prestador: nome });
     res.status(200).json(prestador);
   } catch (error) {

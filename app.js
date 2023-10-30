@@ -8,10 +8,7 @@ const app = express();
 
 app.use(express.json());
 
-
-// nesse formato, define uma pré rota derivando da router
-app.use('/prestador', prestadorRouter);//criado
-
+app.use('/prestador', prestadorRouter);
 
 app.listen(3000, () => {
   console.log('Servidor foi iniciado')
