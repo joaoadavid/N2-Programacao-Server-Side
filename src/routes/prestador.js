@@ -21,6 +21,18 @@ router.get('/nome_prestador', async (req, res) => {
     res.status(500).json(error); // Erro interno do servidor
   }
 });
+
+router.get('/nome_prestador/:nome', async (req, res) => {
+  try {
+    let { nome } = req.params;
+    // Utiliza o campo 'nome_prestador' na projeção da consulta
+    let prestadores = await Prestador.find({ nome_prestador: nome });
+    res.status(200).json(prestador);
+  } catch (error) {
+    res.status(422).json(error);
+  }
+});
+
 //ADICIONA UM NOVO PRESTADOR
 router.post('/', async (req, res) => {
   let {codigo_prestador, nome_prestador, cpf_prestador} = req.body;
