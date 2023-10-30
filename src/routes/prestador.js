@@ -13,6 +13,7 @@ router.get('/', async (req, res) => {
       res.status(422).json(error);//houve um problema na requisição do cliente.
     }
 })
+// Filtra somente os nomes dos prestadores
 router.get('/nome_prestador', async (req, res) => {
   try {
     let prestadores = await Prestador.find({}, 'nome_prestador'); // Apenas traz o campo 'nome_prestador'
@@ -21,12 +22,12 @@ router.get('/nome_prestador', async (req, res) => {
     res.status(500).json(error); // Erro interno do servidor
   }
 });
-
+//Filtra os prestadores pelo nome
 router.get('/nome_prestador/:nome', async (req, res) => {
   try {
     let { nome } = req.params;
     // Utiliza o campo 'nome_prestador' na projeção da consulta
-    let prestadores = await Prestador.find({ nome_prestador: nome });
+    let prestador = await Prestador.find({ nome_prestador: nome });
     res.status(200).json(prestador);
   } catch (error) {
     res.status(422).json(error);
